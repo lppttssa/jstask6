@@ -44,23 +44,12 @@
 			initialize: function(pX,pY){
 				this.posX = pX; //позиция шарика по X
 				this.posY = pY; //позиция шарика по Y
-				this.catet1=[pX,pY,pX+25,pY+25];
-				this.catet2=[pX,pY,pX-25,pY-25];
-				this.catet3=[pX+25,pY+25,pX-25,pY-25];
-				this.allsides=[[pX,pY,pX+25,pY+25],[pX,pY,pX-25,pY-25],[pX+25,pY+25,pX-25,pY-25]]
 				this.colTriangle = 'rgb('+Math.floor(Math.random()*256)+','
 				+Math.floor(Math.random()*256)+','+Math.floor(Math.random()*256)+')';
 				this.rTriangle = 5+Math.random()*25;
 			},
 			posX: 0,
 			posY: 0,
-			isCircle:false,
-			isTriangle:true,
-			isRectangle:false,
-			catet1:[],
-			catet2:[],
-			catet3:[],
-			allsides:[],
 			colTriangle:"rgb(0,0,0)",
 			rTriangle: 0,
 			colorTriangle: function(ctx){
@@ -89,16 +78,10 @@
 			initialize: function(pX,pY){
 				this.posX = pX; //позиция шарика по X
 				this.posY = pY; //позиция шарика по Y
-				this.catet1=[pX,pY,pX+25,pY+25];
-				this.catet2=[pX,pY,pX-25,pY-25];
-				this.catet3=[pX+25,pY+25,pX-25,pY-25];
-				this.allsides=[[pX,pY,pX+25,pY+25],[pX,pY,pX-25,pY-25],[pX+25,pY+25,pX-25,pY-25]]
 				this.colRectangle = 'rgb('+Math.floor(Math.random()*256)+','
 				+Math.floor(Math.random()*256)+','+Math.floor(Math.random()*256)+')';
 				this.rRectangle = 5+Math.random()*25;
 			},
-			isTriangle:false,
-			isRectangle:true,
 			colRectangle:"rgb(0,0,0)",
 			rRectangle: 0,
 			colorRectangle: function(ctx){
@@ -197,6 +180,12 @@
 				balls[i].posY = balls[i].posY + (Math.random()*2-4);
 				makeBigger(balls[i]);
 				if (balls[i].rBall > 50) {
+					balls.splice(i,1);
+				}
+				if (balls[i].rTriangle > 50) {
+					balls.splice(i,1);
+				}
+				if (balls[i].rRectangle > 50) {
 					balls.splice(i,1);
 				}
 				balls[i].draw(ctx);
@@ -299,13 +288,13 @@
 					makeBigger(balls[i]);
 					if (balls[i].rBall > 50) {
 					balls.splice(i,1);
-				}
-				if (balls[i].rTriangle > 50) {
-					balls.splice(i,1);
-				}
-				if (balls[i].rRectangle > 50) {
-					balls.splice(i,1);
-				}
+					}
+					if (balls[i].rTriangle > 50) {
+						balls.splice(i,1);
+					}
+					if (balls[i].rRectangle > 50) {
+						balls.splice(i,1);
+					}
 					balls[i].draw(ctx);
 					if ((balls[i].posX > canvas.width)||(balls[i].posX < 0) ||(balls[i].posY < 0)) 
 						balls.splice(i,1);
@@ -336,6 +325,14 @@
 					}
 					makeBigger(balls[i]);
 					if (balls[i].rBall > 50) {
+						balls.splice(i,1);
+						arr.splice(i,1);
+					}
+					if (balls[i].rTriangle > 50) {
+						balls.splice(i,1);
+						arr.splice(i,1);
+					}
+					if (balls[i].rRectangle > 50) {
 						balls.splice(i,1);
 						arr.splice(i,1);
 					}
